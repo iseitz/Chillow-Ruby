@@ -1,3 +1,5 @@
+require_relative 'box'
+
 class Truck
   include AddRemove
   attr_reader :capacity

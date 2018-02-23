@@ -9,6 +9,30 @@ describe Truck do
     expect(my_truck.occupants.empty?).to be(true)
   end
 
+  describe "#full?" do
+    context 'truck is full' do
+      it 'returns true' do
+        my_truck.add("Teddy", "Rubin")
+        my_truck.add("Igor", "Zuev")
+        my_truck.add("Igor", "Zuev")
+        my_truck.add("Pete", "Lenon")
+        expect(my_truck.full?).to eq(true)
+      end
+    end
+
+    context 'truck has available space' do
+      it 'returns false when the truck is just created' do
+        expect(my_truck.full?).to eq(false)
+      end
+
+      it 'returns false if there is space left' do
+        my_truck.add("Igor", "Zuev")
+        my_truck.add("Pete", "Lenon")
+        expect(my_truck.full?).to eq(false)
+      end
+    end
+  end
+
   describe '#add' do
     context 'truck has available spaces' do
       it 'adds a box of an occupant to the truck' do
