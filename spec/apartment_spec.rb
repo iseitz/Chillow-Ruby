@@ -40,9 +40,9 @@ describe Apartment do
     context 'apartment is full' do
       it 'returns true' do
         my_apartment.capacity = 3
-        my_apartment.add_roommate("Teddy", "Rubin")
-        my_apartment.add_roommate("Igor", "Zuev")
-        my_apartment.add_roommate("Pete", "Lenon")
+        my_apartment.add("Teddy", "Rubin")
+        my_apartment.add("Igor", "Zuev")
+        my_apartment.add("Pete", "Lenon")
         expect(my_apartment.full?).to eq(true)
       end
     end
@@ -55,13 +55,13 @@ describe Apartment do
     end
   end
 
-  describe '#add_roommate' do
+  describe '#add' do
     context 'apartment has available spaces' do
       it 'adds a roommate to the appartment' do
         my_apartment.capacity = 3
-        my_apartment.add_roommate("Teddy", "Rubin")
-        my_apartment.add_roommate("Igor", "Zuev")
-        my_apartment.add_roommate("Pete", "Lenon")
+        my_apartment.add("Teddy", "Rubin")
+        my_apartment.add("Igor", "Zuev")
+        my_apartment.add("Pete", "Lenon")
         expect(my_apartment.occupants.size).to be(3)
         expect(my_apartment.occupants[0].first_name).to eq("Teddy")
         expect(my_apartment.occupants[1].last_name).to eq("Zuev")
@@ -72,22 +72,22 @@ describe Apartment do
     context 'apartment is full' do
       it 'does not add a roommate and raises an error message' do
         my_apartment.capacity = 2
-        my_apartment.add_roommate("Teddy", "Rubin")
-        my_apartment.add_roommate("Igor", "Zuev")
+        my_apartment.add("Teddy", "Rubin")
+        my_apartment.add("Igor", "Zuev")
         expect(my_apartment.occupants.size).to be(2)
         expect(my_apartment.occupants[0].first_name).to eq("Teddy")
         expect(my_apartment.occupants[1].last_name).to eq("Zuev")
-        expect{my_apartment.add_roommate("Pete", "Lenon")}.to raise_error(NoAvailablePlace, "No place is available at the appartment at this time")
+        expect{my_apartment.add("Pete", "Lenon")}.to raise_error(NoAvailablePlace, "No place is available at this time")
       end
     end
   end
 
-  describe '#remove_roommate' do
+  describe '#remove' do
     it 'removes a roommate with a given first and last name' do
       my_apartment.capacity = 2
-      my_apartment.add_roommate("Teddy", "Rubin")
-      my_apartment.add_roommate("Igor", "Zuev")
-      my_apartment.remove_roommate("Teddy", "Rubin")
+      my_apartment.add("Teddy", "Rubin")
+      my_apartment.add("Igor", "Zuev")
+      my_apartment.remove("Teddy", "Rubin")
       expect(my_apartment.occupants.size).to eq(1)
       expect(my_apartment.occupants[0].first_name).to eq("Igor")
       expect(my_apartment.full?).to be(false)
